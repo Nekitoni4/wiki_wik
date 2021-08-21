@@ -57,9 +57,9 @@ async function getPageInfo(title) {
     return {
         'title': pageTitle,
         content,
-        url,
-        size,
-        'count_words': countWords
+        'url': decodeURI(url),
+        'size': +size,
+        'count_words': +countWords
     };
 }
 

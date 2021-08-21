@@ -11,5 +11,12 @@ class Articles extends Model
 
     public $table = "article";
 
-    protected $fillable = ['title', 'content', 'count_words', 'size', 'url'];
+    protected $fillable = [
+        'options->enabled',
+        'title',
+        'content',
+        'count_words',
+        'size',
+        'url'
+    ];
 }

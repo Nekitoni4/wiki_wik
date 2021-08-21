@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\ApiArticlesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +15,5 @@ use App\Http\Controllers\ArticlesController;
 |
 */
 
-Route::get('articles', [ArticlesController::class, 'index']);
-Route::post('articles', [ArticlesController::class, 'store']);
+Route::get('articles', [ApiArticlesController::class, 'index']);
+Route::post('articles', [ApiArticlesController::class, 'store']);
