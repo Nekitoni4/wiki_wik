@@ -16,7 +16,7 @@ class CreateAtomTable extends Migration
         Schema::create('atom', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title', 100);
+            $table->string('title', 100)->unique();
         });
     }
 

@@ -1,4 +1,4 @@
-import {validateNetwork} from "./network_helpers.js";
+import {onServe} from "./helpers/serve.js";
 
 function bytesToKb(bytes) {
     return Math.floor(bytes/1024);
@@ -23,15 +23,12 @@ async function getPageInfoByTitle(title) {
         'formatversion': 2,
         'format': 'json'
     });
-    const request = await fetch(requestPath);
-    return validateNetwork(request, async () => {
-        const jsonPesponse = await request.json();
-        if (!wikiQueryIsMissing(jsonPesponse)) {
-            const jsonPage = jsonPesponse.query.pages[0];
-            return [jsonPage.pageid, jsonPage.title, jsonPage.extract];
-        }
-        throw new Error('Страница не найдена по данному запросу!');
-    });
+    const jsonResponse = await onServe(requestPath);
+    if (!wikiQueryIsMissing(jsonResponse)) {
+        const jsonPage = jsonResponse.query.pages[0];
+        return [jsonPage.pageid, jsonPage.title, jsonPage.extract];
+    }
+    throw new Error('Страница не найдена по данному запросу!');
 }
 
 async function getPageInfoByAddInfo(id) {
@@ -43,11 +40,9 @@ async function getPageInfoByAddInfo(id) {
         'prop': 'info',
         'inprop': 'url'
     });
-    const request = await fetch(requestPath);
-    return validateNetwork(request, async () => {
-        const targetPage = (await request.json()).query.pages[id];
-        return [targetPage.canonicalurl, bytesToKb(targetPage.length), targetPage.length];
-    });
+    const response = await onServe(requestPath);
+    const targetPage = response.query.pages[id];
+    return [targetPage.canonicalurl, bytesToKb(targetPage.length), targetPage.length];
 }
 
 async function getPageInfo(title) {

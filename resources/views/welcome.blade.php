@@ -56,10 +56,21 @@
                                 </div>
                             </div>
                             <div class="search_articles__wrapper hidden">
-                                <form class="articles_search">
-                                    <input type="text" class="search_field" value="Никита" placeholder="Поисковая фраза">
-                                    <button type="submit" class="search_btn">Скопировать</button>
-                                </form>
+                                <div class="search_frame">
+                                    <form class="articles_search">
+                                        <input type="text" class="search_field" value="Никита" placeholder="Поисковая фраза">
+                                        <button type="submit" class="search_btn">Скопировать</button>
+                                    </form>
+                                    <div class="coincidences_result hidden">
+                                        Найдено: <span class="coincidences_value"></span> совпадения
+                                    </div>
+                                    <ul class="search_results">
+
+                                    </ul>
+                                </div>
+                                <div class="content_frame">
+
+                                </div>
                             </div>
                         </div>
                     </div>

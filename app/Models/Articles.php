@@ -19,4 +19,9 @@ class Articles extends Model
         'size',
         'url'
     ];
+
+    public function atoms() {
+        return $this->belongsToMany(Atoms::class, 'atom_article', 'article_id', 'atom_id')
+            ->using(AtomArticle::class);
+    }
 }

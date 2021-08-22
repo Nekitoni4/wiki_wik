@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiArticlesController;
+use App\Http\Controllers\ApiSearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,5 @@ use App\Http\Controllers\ApiArticlesController;
 
 Route::get('articles', [ApiArticlesController::class, 'index']);
 Route::post('articles', [ApiArticlesController::class, 'store']);
+Route::get('search', [ApiSearchController::class, 'index']);
+Route::get('search/{id}', [ApiSearchController::class, 'searchByID']);

@@ -19,8 +19,8 @@ class CreateAtomArticleTable extends Migration
             $table->unsignedBigInteger('atom_id');
             $table->unsignedBigInteger('article_id');
             $table->integer('occurrences');
-            $table->foreign('atom_id')->references('id')->on('atom');
-            $table->foreign('article_id')->references('id')->on('article');
+            $table->foreign('atom_id')->references('id')->on('atom')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('article_id')->references('id')->on('article')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
