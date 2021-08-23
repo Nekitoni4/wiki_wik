@@ -8,7 +8,7 @@ async function onServe(URL, typeRequest = 'GET', targetObject = null) {
     if (requestResponse.ok) {
         return requestResponse.json();
     } else {
-        throw new Error(`Ошибка ${requestResponse.status}: ${requestResponse.statusText}`);
+        throw requestResponse;
     }
 }
 

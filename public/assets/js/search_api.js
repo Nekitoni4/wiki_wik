@@ -1,13 +1,21 @@
 import {onServe} from "./helpers/serve.js";
+import {config} from "./network_config.js";
 
 async function getArticlesByAtom(atom) {
-    const targetUrl = `http://localhost:8000/api/search?atom=${atom.toLowerCase()}`;
+    const targetUrl = `http://${config.host}:${config.port}/api/search?atom=${atom.toLowerCase()}`;
     return onServe(targetUrl);
 }
 
 async function getArticleById(id) {
-    const targetUrl = `http://localhost:8000/api/search/${id}`;
+    const targetUrl = `http://${config.host}:${config.port}/api/search/${id}`;
     return onServe(targetUrl);
+}
+
+
+function renderArticleContent(article, containerSelector) {
+    const elem = document.querySelector(containerSelector);
+    const {content} = article;
+    elem.innerHTML = `<div class="content">${content}</div>`;
 }
 
 
@@ -16,7 +24,8 @@ function getCoincidencesNumber(searchArticles) {
 }
 
 function renderCoincidencesNumber(searchArticles, containerSelector) {
-    document.querySelector(containerSelector).textContent = getCoincidencesNumber(searchArticles);
+    const coincidencesNumber = getCoincidencesNumber(searchArticles);
+    document.querySelector(containerSelector).textContent = coincidencesNumber;
 }
 
 function renderSearchRows(searchArticles, containerSelector) {
@@ -31,11 +40,11 @@ function renderSearchRow(searchArticle) {
     const {title, id} = searchArticle;
     const occurences = searchArticle['pivot']['occurrences'];
     const template = `
-        <li><a href="#" data-id="${id}">${title}</a>(${occurences} вхождений)</li>
+        <li><a href="#" data-id="${id}">${title} (${occurences} вхождений)</a></li>
     `;
     return template;
 }
 
 
 
-export {getArticlesByAtom, renderSearchRows, renderCoincidencesNumber};
+export {getArticlesByAtom, renderSearchRows, getCoincidencesNumber, renderArticleContent, getArticleById};

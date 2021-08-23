@@ -15,22 +15,23 @@
             <div class="container">
                 <div class="app__wrapper">
                     <div class="app__control_panel">
-                        <button class="btn import_articles__btn">Импорт статей</button>
-                        <button class="btn search_articles__btn">Поиск</button>
+                        <button class="button import_articles__btn">Импорт статей</button>
+                        <button class="button search_articles__btn">Поиск</button>
                     </div>
-                    <div class="app__inner">
+                    <div class="box app__inner">
                         <div class="container">
                             <div class="import_articles__wrapper">
                                 <form class="wiki_import">
-                                    <input type="text" class="wiki_import__field" value="Никита" placeholder="Ключевое слово">
-                                    <button type="submit" class="wiki_import__btn">Скопировать</button>
+                                    <input type="text" class="input wiki_import__field" value="Никита" placeholder="Ключевое слово">
+                                    <button type="submit" class="button wiki_import__btn">Скопировать</button>
+                                    <progress class="hidden import_progress progress is-small is-primary" max="100">15%</progress>
                                 </form>
-                                <div class="import_info">
-                                    <p class="import__success hidden">Импорт завершён!</p>
+                                <div class="import_info__wrapper message is-primary hidden">
+
                                 </div>
                                 <div class="articles">
                                     @if(count($articles) > 0)
-                                        <table class="articles__table">
+                                        <table class="table articles__table">
                                             <thead>
                                             <tr>
                                                 <td>Название статей</td>
@@ -56,26 +57,33 @@
                                 </div>
                             </div>
                             <div class="search_articles__wrapper hidden">
-                                <div class="search_frame">
-                                    <form class="articles_search">
-                                        <input type="text" class="search_field" value="Никита" placeholder="Поисковая фраза">
-                                        <button type="submit" class="search_btn">Скопировать</button>
-                                    </form>
-                                    <div class="coincidences_result hidden">
-                                        Найдено: <span class="coincidences_value"></span> совпадения
+                                <div class="search_wrapper">
+                                    <div class="search_frame">
+                                        <form class="articles_search">
+                                            <input type="text" class="input search_field" value="Никита" placeholder="Поисковая фраза">
+                                            <button type="submit" class="button search_btn">Скопировать</button>
+                                        </form>
+                                        <ul class="menu-list search_results">
+
+                                        </ul>
                                     </div>
-                                    <ul class="search_results">
+                                    <div class="card content_frame hidden">
+                                        <div class="card-content card__article_content">
 
-                                    </ul>
-                                </div>
-                                <div class="content_frame">
-
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="notification is-danger">
+            <p class="notification__content"></p>
+        </div>
+        <div class="notification is-success">
+            <p class="notification__content"></p>
         </div>
     </main>
 </body>

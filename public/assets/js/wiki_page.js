@@ -1,12 +1,6 @@
 import {onServe} from "./helpers/serve.js";
+import {bytesToKb, countWordsInContent} from './helpers/common.js';
 
-function bytesToKb(bytes) {
-    return Math.floor(bytes/1024);
-}
-
-function countWordsInContent(text) {
-    return text.split(' ').length;
-}
 
 function wikiQueryIsMissing(jsonResponse) {
     return jsonResponse.query.pages[0].missing;
@@ -59,6 +53,6 @@ async function getPageInfo(title) {
 }
 
 
-export { getPageInfo };
+export { getPageInfo};
 
 
