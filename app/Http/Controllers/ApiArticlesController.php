@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Articles;
 use App\Models\AtomArticle;
 use App\Models\Atoms;
-use Illuminate\Database\Eloquent\Model;
+use Validator;
 use Illuminate\Http\Request;
-use function MongoDB\BSON\toJSON;
-use function Webmozart\Assert\Tests\StaticAnalysis\upper;
 
 class ApiArticlesController extends Controller
 {
@@ -39,9 +37,16 @@ class ApiArticlesController extends Controller
      * @return mixed
      */
     public function store(Request $request) {
-        $request->validate([
-           'title' => 'unique:article'
+        $validator = Validator::make($request->json()->all(), [
+           'title' => 'bail|required|unique:article',
+            'content' => 'required:article',
+            'count_words' => 'required',
+            'size' => 'required',
+            'url' => 'required'
         ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
         $content = $request->json()->get('content');
         $chunkedDescription = collect(explode(' ', collect(preg_split('/\n/', $content))
             ->filter(function ($sentence) {
