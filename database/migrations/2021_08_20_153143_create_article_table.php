@@ -17,7 +17,7 @@ class CreateArticleTable extends Migration
             $table->id();
             $table->timestamps();
             $table->char('title', 100);
-            $table->string('content');
+            $table->text('content');
             $table->integer('count_words');
             $table->string('url');
             $table->integer('size');
